@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:arrow_path/arrow_path.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:ui' as ui;
 
 part 'multi_network_graph_view.dart';
 part 'models/drawing_model.dart';

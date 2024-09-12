@@ -88,6 +88,12 @@ class GraphViewPainter extends CustomPainter {
 
       canvas.drawCircle(c, nodeRadius, paint);
       _drawText(canvas, node.x, node.y, node.content, textStyle);
+      // if(node.widget == null){
+      //   _drawText(canvas, node.x, node.y, node.content, textStyle);
+      // } else {
+      //   _drawAnyWidget(
+      //       canvas, node.x, node.y, node.widget!, node.size!);
+      // }
     }
   }
 
@@ -117,6 +123,43 @@ class GraphViewPainter extends CustomPainter {
     model.nodeRadiusList = result;
   }
 
+  // Future<ui.Image?> widgetToImage(Widget widget) async {
+  //   final key = GlobalKey();
+  //   final boundary = RepaintBoundary(key: key);
+  //   final renderObject = boundary.createRenderObject(null) as RenderRepaintBoundary;
+  //
+  //   final container = MaterialApp(
+  //     home: Scaffold(
+  //       body: Center(child: boundary),
+  //     ),
+  //   );
+  //
+  //   final buildContext = key.currentContext;
+  //   if (buildContext == null) return null;
+  //
+  //   final renderObject = buildContext.findRenderObject() as RenderRepaintBoundary;
+  //
+  //   final image = await renderObject.toImage(pixelRatio: 3.0);
+  //   return image;
+  // }
+  //
+  // void _drawWidget(Canvas canvas, centerX, centerY, ui.Image image) {
+  //   final paint = Paint();
+  //   final xCenter = centerX - (image.width / 2);
+  //   final yCenter = centerY - (image.height / 2);
+  //   final offset = Offset(xCenter.toDouble(), yCenter.toDouble());
+  //
+  //   canvas.drawImage(image, offset, paint);
+  // }
+  //
+  //
+  // void _drawAnyWidget(Canvas canvas, centerX, centerY, Widget widget, Size size) async {
+  //
+  //   final image = await widgetToImage(widget);
+  //   _drawWidget(canvas, centerX, centerY, image);
+  // }
+
+
   void _drawText(Canvas canvas, centerX, centerY, text, style) {
     final textSpan = TextSpan(
       text: text,
@@ -143,7 +186,7 @@ class GraphViewPainter extends CustomPainter {
     canvas.translate(offsetX, offsetY);
 
     _drawEdges(canvas);
-    _drawNodes(canvas);
+    // _drawNodes(canvas);
 
     canvas.restore();
   }

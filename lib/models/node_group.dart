@@ -7,6 +7,7 @@ class NodeGroup {
   double x;
   double y;
   LinearGradient gradient;
+  Widget? widget;
 
   late List<NodeModel> nodeList;
   late List<EdgeModel> edgeList;
@@ -17,6 +18,7 @@ class NodeGroup {
     required this.childNodeList,
     required this.x,
     required this.y,
+    this.widget,
     this.gradient = blueLinearGradientOne,
   }) {
     nodeList = initNodeList();
@@ -24,7 +26,7 @@ class NodeGroup {
   }
 
   initNodeList() {
-    List<NodeModel> resultList = [NodeModel(isBigNode: true, id: getNewUUID(), content: title, onClick: centerNodeOnClick, x: x, y: y, gradient: gradient)];
+    List<NodeModel> resultList = [NodeModel(isBigNode: true, id: getNewUUID(), content: title, widget: widget, onClick: centerNodeOnClick, x: x, y: y, gradient: gradient)];
 
     Offset rootOffset = Offset(x, y);
 
