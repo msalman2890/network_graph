@@ -91,70 +91,68 @@ class _MultiNetworkGraphViewState extends State<MultiNetworkGraphView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: GestureDetector(
-            onPanDown: _handlePanDown,
-            onPanUpdate: _handlePanUpdate,
-            onLongPressStart: _handleLongPressStart,
-            onLongPressMoveUpdate: _handleLongPressMoveUpdate,
-            //       child: CustomPaint(
-            //         child: Container(),
-            //         painter: GraphViewPainter(model, offsetX, offsetY),
-            //       ),
-            //     ),
-            //   );
-            // }
-            child: Stack(
-                children: [
-                  CustomPaint(
-                    size: Size.infinite,
-                    painter: GraphViewPainter(model, offsetX, offsetY),
-                  ),
-                  ...model.getNodeList().map((node) {
-                    return Positioned(
-                      left: node.x! + offsetX - 25,
-                      top: node.y! + offsetY - 25,
-                      child: GestureDetector(
-                        onPanUpdate: (details) {
-                          setState(() {
-                            node.x = node.x! + details.delta.dx;
-                            node.y = node.y! + details.delta.dy;
-                          });
-                        },
-                        child: node.widget != null ?
-                        node.widget :
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.blueGrey[900],
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              node.content,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
+    return GestureDetector(
+        onPanDown: _handlePanDown,
+        onPanUpdate: _handlePanUpdate,
+        onLongPressStart: _handleLongPressStart,
+        onLongPressMoveUpdate: _handleLongPressMoveUpdate,
+        //       child: CustomPaint(
+        //         child: Container(),
+        //         painter: GraphViewPainter(model, offsetX, offsetY),
+        //       ),
+        //     ),
+        //   );
+        // }
+        child: Stack(
+            children: [
+              CustomPaint(
+                size: Size.infinite,
+                painter: GraphViewPainter(model, offsetX, offsetY),
+              ),
+              ...model.getNodeList().map((node) {
+                return Positioned(
+                  left: node.x! + offsetX - 25,
+                  top: node.y! + offsetY - 25,
+                  child: GestureDetector(
+                    onPanUpdate: (details) {
+                      setState(() {
+                        node.x = node.x! + details.delta.dx;
+                        node.y = node.y! + details.delta.dy;
+                      });
+                    },
+                    child: node.widget != null ?
+                    node.widget :
+                    Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blueGrey[900],
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 4,
+                              offset: Offset(2, 2),
                             ),
-                          )
+                          ],
                         ),
-                      ),
-                    );
-                  }
-                  )
-                ]
-            )
+                        child: Center(
+                          child: Text(
+                            node.content,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                    ),
+                  ),
+                );
+              }
+              )
+            ]
         )
     );
   }
